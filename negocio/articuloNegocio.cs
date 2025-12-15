@@ -55,7 +55,29 @@ namespace negocio
         }
         public void agregar(Articulo nuevo) 
         {
+            AccesoDatos escritura = new AccesoDatos();
+            try
+            {
+                escritura.SetearConsulta("insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) " +
+                    "values (@Codigo, @Nombre, @Descripcion, @Marca, @Categoria, @ImagenUrl, @Precio)");
+                escritura.SetearParametro("@Codigo", nuevo.Codigo);
+                escritura.SetearParametro("@Nombre", nuevo.Nombre);
+                escritura.SetearParametro("@Descripcion", nuevo.Descripcion);
+                escritura.SetearParametro("@Marca", nuevo.Marca.Id);
+                escritura.SetearParametro("@Categoria", nuevo.Categoria.Id);
+                escritura.SetearParametro("@ImagenUrl", nuevo.ImagenUrl);
+                escritura.SetearParametro("@Precio", nuevo.Precio);
+                escritura.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                escritura.CerrarConexion();
+            }
         }
     }
 }

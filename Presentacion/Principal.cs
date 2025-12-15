@@ -26,7 +26,6 @@ namespace Presentacion
         private void Principal_Load(object sender, EventArgs e)
         {
             cargar();
-
         }
         private void cargar()
         {
@@ -107,7 +106,18 @@ namespace Presentacion
         {
            alta_modificacion alta = new alta_modificacion();
             alta.ShowDialog();
+            cargar();
             
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+            alta_modificacion modificar = new alta_modificacion(seleccionado);
+            modificar.ShowDialog();
+            cargar();
         }
     }
 }
