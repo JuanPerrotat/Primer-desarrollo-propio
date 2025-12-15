@@ -28,20 +28,14 @@ namespace negocio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                   
-                    
                     aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
-                    
                     aux.Precio = (decimal)datos.Lector["Precio"];
-
-
                     aux.Marca = new Marca();
                     aux.Marca.Id = (int)datos.Lector["Id"];
-                    aux.Marca.Descripcion = (string)datos.Lector["Descripcion"];
-
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Categoria = new Categoria();
                     aux.Categoria.Id = (int)datos.Lector["Id"];
-                    aux.Categoria.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     lista.Add(aux);
 
                 }
@@ -57,6 +51,10 @@ namespace negocio
             {
                 datos.CerrarConexion();
             }
+
+        }
+        public void agregar(Articulo nuevo) 
+        {
 
         }
     }

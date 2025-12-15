@@ -65,5 +65,6 @@ namespace negocio
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
+        
     }
 }
