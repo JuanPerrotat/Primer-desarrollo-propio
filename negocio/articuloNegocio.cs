@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using dominio;
+using System.Security.Cryptography.X509Certificates;
 
 namespace negocio
 {
@@ -77,6 +78,33 @@ namespace negocio
             finally
             {
                 escritura.CerrarConexion();
+            }
+        }
+        public void modificar (Articulo art)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetearConsulta("update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria,  ImagenUrl = @Imagen, Precio = @Precio where Id = @Id");
+                datos.SetearParametro("@Codigo", art.Codigo);
+                datos.SetearParametro("@Nombre", art.Nombre);
+                datos.SetearParametro("@Descripcion", art.Descripcion);
+                datos.SetearParametro("@IdMarca", art.Marca.Id);
+                datos.SetearParametro("@IdCategoria", art.Categoria.Id);
+                datos.SetearParametro("@Imagen", art.ImagenUrl);
+                datos.SetearParametro("@Precio", art.Precio);
+                datos.SetearParametro("@Id", art.Id);
+
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
             }
         }
     }

@@ -39,35 +39,38 @@ namespace Presentacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo nuevoArticulo = new Articulo();
             articuloNegocio negocio = new articuloNegocio();
             try
             {
                 if (articulo == null)
                     articulo = new Articulo();
                 
-                nuevoArticulo.Codigo =  txtbCodigo.Text;
-                nuevoArticulo.Nombre = txtNombre.Text;
-                nuevoArticulo.Descripcion = txtDescripcion.Text;
-                nuevoArticulo.Precio = decimal.Parse(txtPrecio.Text);
-                nuevoArticulo.Categoria = (Categoria)cboCategoria.SelectedItem;
-                nuevoArticulo.Marca = (Marca)cboMarca.SelectedItem;
-                nuevoArticulo.ImagenUrl = txtImagen.Text;
+                articulo.Codigo =  txtbCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.ImagenUrl = txtImagen.Text;
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                articulo.Marca = (Marca)cboMarca.SelectedItem;
 
                 if (articulo.Id != 0)
                 {
-                negocio.agregar(nuevoArticulo);
-                MessageBox.Show("El nuevo artículo ha sido agregado.", "Advertencia");
-
+                    negocio.modificar(articulo);
+                    MessageBox.Show("El artículo ha sido modificado.", "Modificación");
                 }
-                
+                else
+                {
+                    negocio.agregar(articulo);
+                    MessageBox.Show("El nuevo artículo ha sido agregado", "Creación");
+                }
+
 
                     Close();
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Por favor, revise que todos los datos estén completos.", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -81,11 +84,10 @@ namespace Presentacion
                 cboCategoria.DataSource = negocio.listar();
                 cboCategoria.ValueMember = "Id";
                 cboCategoria.DisplayMember = "Descripcion";
-                cboCategoria.SelectedIndex = 0;
                 cboMarca.DataSource = negocio2.listar();
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
-                cboMarca.SelectedIndex = 0;
+
 
                 if(articulo != null)
                 {
@@ -95,6 +97,8 @@ namespace Presentacion
                     txtPrecio.Text = articulo.Precio.ToString();
                     txtImagen.Text = articulo.ImagenUrl;
                     CargarImagen(articulo.ImagenUrl);
+                    cboMarca.SelectedValue = articulo.Marca.Id;
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
                   
 
                 }
@@ -129,6 +133,11 @@ namespace Presentacion
             {
                 pbImagenes.Load(imagenError);
             }
+        }
+
+        private void txtImagen_Leave(object sender, EventArgs e)
+        {
+            CargarImagen(txtImagen.Text);
         }
     }
 }

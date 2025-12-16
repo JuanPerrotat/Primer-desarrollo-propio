@@ -119,7 +119,7 @@
             // 
             this.txtbCodigo.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbCodigo.Location = new System.Drawing.Point(145, 59);
-            this.txtbCodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbCodigo.Margin = new System.Windows.Forms.Padding(4);
             this.txtbCodigo.Name = "txtbCodigo";
             this.txtbCodigo.Size = new System.Drawing.Size(427, 27);
             this.txtbCodigo.TabIndex = 6;
@@ -128,7 +128,7 @@
             // 
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(145, 108);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(427, 27);
             this.txtNombre.TabIndex = 7;
@@ -137,7 +137,7 @@
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescripcion.Location = new System.Drawing.Point(145, 158);
-            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(427, 27);
             this.txtDescripcion.TabIndex = 8;
@@ -148,7 +148,7 @@
             this.cboCategoria.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCategoria.FormattingEnabled = true;
             this.cboCategoria.Location = new System.Drawing.Point(145, 209);
-            this.cboCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboCategoria.Margin = new System.Windows.Forms.Padding(4);
             this.cboCategoria.Name = "cboCategoria";
             this.cboCategoria.Size = new System.Drawing.Size(427, 27);
             this.cboCategoria.TabIndex = 9;
@@ -159,7 +159,7 @@
             this.cboMarca.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboMarca.FormattingEnabled = true;
             this.cboMarca.Location = new System.Drawing.Point(145, 254);
-            this.cboMarca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboMarca.Margin = new System.Windows.Forms.Padding(4);
             this.cboMarca.Name = "cboMarca";
             this.cboMarca.Size = new System.Drawing.Size(427, 27);
             this.cboMarca.TabIndex = 10;
@@ -168,7 +168,7 @@
             // 
             this.txtPrecio.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrecio.Location = new System.Drawing.Point(145, 305);
-            this.txtPrecio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPrecio.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(427, 27);
             this.txtPrecio.TabIndex = 11;
@@ -176,7 +176,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Location = new System.Drawing.Point(145, 436);
-            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(100, 28);
             this.btnAceptar.TabIndex = 12;
@@ -187,7 +187,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(473, 436);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 13;
@@ -198,7 +198,7 @@
             // pbImagenes
             // 
             this.pbImagenes.Location = new System.Drawing.Point(636, 57);
-            this.pbImagenes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbImagenes.Margin = new System.Windows.Forms.Padding(4);
             this.pbImagenes.Name = "pbImagenes";
             this.pbImagenes.Size = new System.Drawing.Size(443, 324);
             this.pbImagenes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -220,15 +220,16 @@
             // 
             this.txtImagen.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtImagen.Location = new System.Drawing.Point(145, 358);
-            this.txtImagen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtImagen.Margin = new System.Windows.Forms.Padding(4);
             this.txtImagen.Name = "txtImagen";
             this.txtImagen.Size = new System.Drawing.Size(427, 27);
             this.txtImagen.TabIndex = 16;
+            this.txtImagen.Leave += new System.EventHandler(this.txtImagen_Leave);
             // 
             // btnImagenLocal
             // 
             this.btnImagenLocal.Location = new System.Drawing.Point(581, 356);
-            this.btnImagenLocal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnImagenLocal.Margin = new System.Windows.Forms.Padding(4);
             this.btnImagenLocal.Name = "btnImagenLocal";
             this.btnImagenLocal.Size = new System.Drawing.Size(32, 28);
             this.btnImagenLocal.TabIndex = 17;
@@ -258,7 +259,7 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCodigo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1149, 625);
             this.Name = "alta_modificacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
