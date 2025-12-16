@@ -77,8 +77,6 @@
             // 
             // pbxImagenes
             // 
-            this.pbxImagenes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbxImagenes.Location = new System.Drawing.Point(1176, 161);
             this.pbxImagenes.Margin = new System.Windows.Forms.Padding(4);
             this.pbxImagenes.Name = "pbxImagenes";

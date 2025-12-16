@@ -21,10 +21,10 @@ namespace negocio
                 datos.EjecutarLectura();
                 while (datos.Lector.Read())
                 {
-                Marca aux = new Marca();
-                aux.Id = (int)datos.Lector["Id"];
-                aux.Descripcion = (string)datos.Lector["Descripcion"];
-                lista.Add(aux);
+                    Marca aux = new Marca();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    lista.Add(aux);
                 }
                 return lista;
             }

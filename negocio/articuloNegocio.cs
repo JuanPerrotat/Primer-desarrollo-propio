@@ -18,8 +18,7 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("select A. Id, A.Codigo, A.Nombre, A.Descripcion, C.Descripcion as Categoria, M.Descripcion as Marca, A.ImagenUrl, A.Precio  " +
-                    "from ARTICULOS A, CATEGORIAS C, Marcas M where A.IdCategoria = C.Id and A.IdMarca = M.Id");
+                datos.SetearConsulta("select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, C.Id as IdCategoria, C.Descripcion as Categoria, M.Id as IdMarca, M.Descripcion as Marca from Articulos A, Categorias C, Marcas M where C.Id = A.IdCategoria and M.Id = A.IdMarca");
                 datos.EjecutarLectura();
 
                 while (datos.Lector.Read())
@@ -31,12 +30,12 @@ namespace negocio
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
-                    aux.Marca = new Marca();
-                    aux.Marca.Id = (int)datos.Lector["Id"];
-                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Categoria = new Categoria();
-                    aux.Categoria.Id = (int)datos.Lector["Id"];
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     lista.Add(aux);
 
                 }
@@ -59,7 +58,8 @@ namespace negocio
             AccesoDatos escritura = new AccesoDatos();
             try
             {
-                escritura.SetearConsulta("insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) " +
+                escritura.SetearConsulta("insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, " +
+                    "ImagenUrl, Precio) " +
                     "values (@Codigo, @Nombre, @Descripcion, @Marca, @Categoria, @ImagenUrl, @Precio)");
                 escritura.SetearParametro("@Codigo", nuevo.Codigo);
                 escritura.SetearParametro("@Nombre", nuevo.Nombre);
@@ -86,13 +86,14 @@ namespace negocio
 
             try
             {
-                datos.SetearConsulta("update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria,  ImagenUrl = @Imagen, Precio = @Precio where Id = @Id");
+                datos.SetearConsulta("update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, " +
+                    "IdMarca = @IdMarca, IdCategoria = @IdCategoria,  ImagenUrl = @ImagenUrl, Precio = @Precio where Id = @Id");
                 datos.SetearParametro("@Codigo", art.Codigo);
                 datos.SetearParametro("@Nombre", art.Nombre);
                 datos.SetearParametro("@Descripcion", art.Descripcion);
                 datos.SetearParametro("@IdMarca", art.Marca.Id);
                 datos.SetearParametro("@IdCategoria", art.Categoria.Id);
-                datos.SetearParametro("@Imagen", art.ImagenUrl);
+                datos.SetearParametro("@ImagenUrl", art.ImagenUrl);
                 datos.SetearParametro("@Precio", art.Precio);
                 datos.SetearParametro("@Id", art.Id);
 

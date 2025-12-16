@@ -55,8 +55,16 @@ namespace Presentacion
 
                 if (articulo.Id != 0)
                 {
-                    negocio.modificar(articulo);
-                    MessageBox.Show("El artículo ha sido modificado.", "Modificación");
+                    try
+                    {
+                        negocio.modificar(articulo);
+                        MessageBox.Show("El artículo ha sido modificado.", "Modificación");
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Datos incompletos o incorrectamente cargados. Por favor, completar los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
                 }
                 else
                 {
@@ -81,12 +89,12 @@ namespace Presentacion
 
             try
             {
-                cboCategoria.DataSource = negocio.listar();
                 cboCategoria.ValueMember = "Id";
                 cboCategoria.DisplayMember = "Descripcion";
-                cboMarca.DataSource = negocio2.listar();
+                cboCategoria.DataSource = negocio.listar();
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
+                cboMarca.DataSource = negocio2.listar();
 
 
                 if(articulo != null)
@@ -95,10 +103,10 @@ namespace Presentacion
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtPrecio.Text = articulo.Precio.ToString();
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
+                    cboMarca.SelectedValue = articulo.Marca.Id;
                     txtImagen.Text = articulo.ImagenUrl;
                     CargarImagen(articulo.ImagenUrl);
-                    cboMarca.SelectedValue = articulo.Marca.Id;
-                    cboCategoria.SelectedValue = articulo.Categoria.Id;
                   
 
                 }
