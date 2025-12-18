@@ -119,5 +119,50 @@ namespace Presentacion
             modificar.ShowDialog();
             cargar();
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            articuloNegocio negocio = new articuloNegocio();
+            Articulo seleccionado;
+
+
+            try
+            {
+            DialogResult respuesta = MessageBox.Show("¿Está seguro de que desea eliminar permanentemente el artículo?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(respuesta == DialogResult.Yes)
+            {
+                seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+                eliminar(seleccionado.Id);
+                MessageBox.Show("El artículo seleccionado ha sido eliminado correctamente.", "Advertencia");
+                cargar();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        public void eliminar(int id)
+        {
+
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.SetearConsulta("delete from ARTICULOS where Id = @Id");
+                datos.SetearParametro("@Id", id);
+                datos.EjecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
