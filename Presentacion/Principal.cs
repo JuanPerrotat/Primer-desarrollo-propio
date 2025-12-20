@@ -26,6 +26,10 @@ namespace Presentacion
         private void Principal_Load(object sender, EventArgs e)
         {
             cargar();
+            cboCampo.Items.Add("Descripción");
+            cboCampo.Items.Add("Categoría");
+            cboCampo.Items.Add("Marca");
+            cboCampo.Items.Add("Precio");
         }
         private void cargar()
         {
@@ -59,7 +63,7 @@ namespace Presentacion
             string imagenError = "https://cdn-icons-png.flaticon.com/512/13434/13434972.png";
             try
             {
-                if(string.IsNullOrEmpty(imagen) || !chequearUrlImagen(imagen))
+                if (string.IsNullOrEmpty(imagen) || !chequearUrlImagen(imagen))
                 {
                     pbxImagenes.Load(imagenError);
                 }
@@ -82,32 +86,26 @@ namespace Presentacion
 
         private void dgvListaArticulos_SelectionChanged(object sender, EventArgs e)
         {
-
             try
             {
-            
-                if(dgvListaArticulos != null)
+                if (dgvListaArticulos.CurrentRow != null)
                 {
-                Articulo articuloSeleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
-                CargarImagen(articuloSeleccionado.ImagenUrl);
-
+                    Articulo articuloSeleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+                    CargarImagen(articuloSeleccionado.ImagenUrl);
                 }
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
-            
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-           alta_modificacion alta = new alta_modificacion();
+            alta_modificacion alta = new alta_modificacion();
             alta.ShowDialog();
             cargar();
-            
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -124,17 +122,15 @@ namespace Presentacion
         {
             articuloNegocio negocio = new articuloNegocio();
             Articulo seleccionado;
-
-
             try
             {
-            DialogResult respuesta = MessageBox.Show("¿Está seguro de que desea eliminar permanentemente el artículo?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(respuesta == DialogResult.Yes)
-            {
-                seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
-                eliminar(seleccionado.Id);
-                MessageBox.Show("El artículo seleccionado ha sido eliminado correctamente.", "Advertencia");
-                cargar();
+                DialogResult respuesta = MessageBox.Show("¿Está seguro de que desea eliminar permanentemente el artículo?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+                    eliminar(seleccionado.Id);
+                    MessageBox.Show("El artículo seleccionado ha sido eliminado correctamente.", "Advertencia");
+                    cargar();
 
                 }
 
@@ -149,14 +145,12 @@ namespace Presentacion
 
         public void eliminar(int id)
         {
-
             try
             {
                 AccesoDatos datos = new AccesoDatos();
                 datos.SetearConsulta("delete from ARTICULOS where Id = @Id");
                 datos.SetearParametro("@Id", id);
                 datos.EjecutarAccion();
-
             }
             catch (Exception ex)
             {
@@ -164,5 +158,86 @@ namespace Presentacion
                 throw ex;
             }
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltro.Text;
+            if (filtro.Length >= 3)
+                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Codigo.ToUpper().Contains(filtro.ToUpper()));
+
+            else
+                listaFiltrada = listaArticulos;
+
+            dgvListaArticulos.DataSource = null;
+            dgvListaArticulos.DataSource = listaFiltrada;
+            OcultarColumnas();
+        }
+
+        public bool solotexto(string cadena)
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!char.IsLetter(caracter) && !char.IsWhiteSpace(caracter))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboCampo.SelectedItem.ToString();
+            if(opcion == "Precio")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Mayor a");
+                cboCriterio.Items.Add("Menor a");
+                cboCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
+        }
+
+        private void btnBuscarFiltroAvanzado_Click(object sender, EventArgs e)
+        {
+            articuloNegocio negocio = new articuloNegocio();
+
+            try
+            {
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvListaArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnDetalle_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+
+                if (dgvListaArticulos.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione un artículo para ver su detalle.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    return;
+                }
+
+                seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;    
+                detalle verDetalle = new detalle(seleccionado);
+                verDetalle.ShowDialog();
+                cargar();
+        }
+
+       
     }
 }

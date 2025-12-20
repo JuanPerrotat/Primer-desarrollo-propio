@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using System.Configuration;
 
 namespace Presentacion
 {
     public partial class alta_modificacion : Form
     {
         private Articulo articulo = null;
+        private OpenFileDialog archivo = null;
         
         public alta_modificacion()
         {
@@ -44,8 +47,8 @@ namespace Presentacion
             {
                 if (articulo == null)
                     articulo = new Articulo();
-                
-                articulo.Codigo =  txtbCodigo.Text;
+
+                articulo.Codigo = txtbCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
@@ -58,22 +61,29 @@ namespace Presentacion
                     try
                     {
                         negocio.modificar(articulo);
-                        MessageBox.Show("El artículo ha sido modificado.", "Modificación");
+                        MessageBox.Show("El artículo ha sido modificado.", "Modificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception)
                     {
-
                         MessageBox.Show("Datos incompletos o incorrectamente cargados. Por favor, completar los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
                 }
                 else
                 {
                     negocio.agregar(articulo);
-                    MessageBox.Show("El nuevo artículo ha sido agregado", "Creación");
+                    MessageBox.Show("El nuevo artículo ha sido agregado", "Alta de artículo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
+                if (archivo != null && !(txtImagen.Text.ToUpper().Contains("HTTP")))
+                {
+                    string carpeta = carpetaImagenes();
+                    string destino = Path.Combine(carpeta, archivo.SafeFileName);
 
-                    Close();
+                    File.Copy(archivo.FileName, destino, true);
+                }
+                   
+
+                Close();
             }
             catch (Exception ex)
             {
@@ -120,17 +130,26 @@ namespace Presentacion
 
         }
 
-        public bool chequearUrlImagen(string url)
+        public bool chequearImagen(string imagen)
         {
-            return Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult)
-                 && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            if (string.IsNullOrWhiteSpace(imagen))
+                return false;
+
+            if (Uri.TryCreate(imagen, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+                return true;
+            
+
+            if (File.Exists(imagen))
+                return true;
+            
+            return false;
         }
         private void CargarImagen(string imagen)
         {
             string imagenError = "https://cdn-icons-png.flaticon.com/512/13434/13434972.png";
             try
             {
-                if (string.IsNullOrEmpty(imagen) || !chequearUrlImagen(imagen))
+                if (!chequearImagen(imagen))
                 {
                     pbImagenes.Load(imagenError);
                 }
@@ -146,6 +165,27 @@ namespace Presentacion
         private void txtImagen_Leave(object sender, EventArgs e)
         {
             CargarImagen(txtImagen.Text);
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png;|jpeg|*.jpeg";
+            if(archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtImagen.Text = archivo.FileName;
+                CargarImagen(archivo.FileName);
+
+            }
+        }
+
+        public string carpetaImagenes()
+        {
+            string ruta  = ConfigurationManager.AppSettings["imagenes-articulo"];
+            if(!Directory.Exists(ruta))
+                Directory.CreateDirectory(ruta);
+
+            return ruta;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace negocio
 
                 while (datos.Lector.Read())
                 {
-                   Articulo aux = new Articulo();
+                    Articulo aux = new Articulo();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
@@ -41,7 +41,7 @@ namespace negocio
                 }
                 return lista;
             }
-            
+
             catch (Exception ex)
             {
 
@@ -53,7 +53,7 @@ namespace negocio
             }
 
         }
-        public void agregar(Articulo nuevo) 
+        public void agregar(Articulo nuevo)
         {
             AccesoDatos escritura = new AccesoDatos();
             try
@@ -80,7 +80,7 @@ namespace negocio
                 escritura.CerrarConexion();
             }
         }
-        public void modificar (Articulo art)
+        public void modificar(Articulo art)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -98,6 +98,100 @@ namespace negocio
                 datos.SetearParametro("@Id", art.Id);
 
                 datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+        public List<Articulo> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Articulo> lista = new List<Articulo>();  
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, C.Id as IdCategoria, C.Descripcion as Categoria, M.Id as IdMarca, M.Descripcion as Marca from Articulos A, Categorias C, Marcas M where C.Id = A.IdCategoria and M.Id = A.IdMarca and ";
+                if (campo == "Precio")
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "A.Precio > " + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "A.Precio < " + filtro;
+                            break;
+                        default:
+                            consulta += "A.Precio = " + filtro;
+                            break;
+                    }
+                else if (campo == "Descripción")
+                    switch (criterio)
+                    {
+                        case "Comienza con ":
+                            consulta += "A.Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con ":
+                            consulta += "A.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "A.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                else if (campo == "Categoría")
+                    switch (criterio)
+                    {
+                        case "Comienza con ":
+                            consulta += "C.Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con ":
+                            consulta += "C.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "C.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                else
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con ":
+                            consulta += "M.Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con ":
+                            consulta += "M.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "M.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                datos.SetearConsulta(consulta);
+                datos.EjecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    lista.Add(aux);
+
+                }
+                return lista;
             }
             catch (Exception ex)
             {
