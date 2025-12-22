@@ -47,14 +47,32 @@ namespace Presentacion
             {
                 if (articulo == null)
                     articulo = new Articulo();
+    
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precio))
+                {
+                    MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                
+
+                if(string.IsNullOrWhiteSpace(txtbCodigo.Text) 
+                    || string.IsNullOrWhiteSpace(txtNombre.Text)
+                    || string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                {
+                    MessageBox.Show("Por favor, complete todos los campos", "Error", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 articulo.Codigo = txtbCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.Precio = precio;
                 articulo.ImagenUrl = txtImagen.Text;
                 articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
+
+
 
                 if (articulo.Id != 0)
                 {
@@ -88,7 +106,7 @@ namespace Presentacion
             catch (Exception ex)
             {
 
-                MessageBox.Show("Por favor, revise que todos los datos estén completos.", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, revise que todos los datos estén completos y/o correctos.", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -175,7 +193,6 @@ namespace Presentacion
             {
                 txtImagen.Text = archivo.FileName;
                 CargarImagen(archivo.FileName);
-
             }
         }
 
@@ -186,6 +203,10 @@ namespace Presentacion
                 Directory.CreateDirectory(ruta);
 
             return ruta;
+        }
+        public bool validarCeldasTexto(string celda)
+        {
+            return !string.IsNullOrEmpty(celda);
         }
     }
 }
