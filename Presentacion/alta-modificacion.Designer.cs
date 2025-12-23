@@ -53,7 +53,7 @@
             // 
             this.lblCodigo.AutoSize = true;
             this.lblCodigo.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodigo.Location = new System.Drawing.Point(54, 50);
+            this.lblCodigo.Location = new System.Drawing.Point(54, 48);
             this.lblCodigo.Name = "lblCodigo";
             this.lblCodigo.Size = new System.Drawing.Size(49, 16);
             this.lblCodigo.TabIndex = 0;
@@ -63,7 +63,7 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(49, 90);
+            this.lblNombre.Location = new System.Drawing.Point(49, 88);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(54, 16);
             this.lblNombre.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescripcion.Location = new System.Drawing.Point(31, 130);
+            this.lblDescripcion.Location = new System.Drawing.Point(31, 128);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(72, 16);
             this.lblDescripcion.TabIndex = 2;
@@ -83,7 +83,7 @@
             // 
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategoria.Location = new System.Drawing.Point(42, 170);
+            this.lblCategoria.Location = new System.Drawing.Point(42, 168);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(61, 16);
             this.lblCategoria.TabIndex = 3;
@@ -93,7 +93,7 @@
             // 
             this.lblMarca.AutoSize = true;
             this.lblMarca.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarca.Location = new System.Drawing.Point(60, 206);
+            this.lblMarca.Location = new System.Drawing.Point(60, 204);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(43, 16);
             this.lblMarca.TabIndex = 4;
@@ -103,7 +103,7 @@
             // 
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecio.Location = new System.Drawing.Point(60, 250);
+            this.lblPrecio.Location = new System.Drawing.Point(60, 248);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(43, 16);
             this.lblPrecio.TabIndex = 5;
@@ -112,7 +112,7 @@
             // txtbCodigo
             // 
             this.txtbCodigo.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbCodigo.Location = new System.Drawing.Point(109, 48);
+            this.txtbCodigo.Location = new System.Drawing.Point(109, 46);
             this.txtbCodigo.Name = "txtbCodigo";
             this.txtbCodigo.Size = new System.Drawing.Size(321, 23);
             this.txtbCodigo.TabIndex = 0;
@@ -120,7 +120,7 @@
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(109, 88);
+            this.txtNombre.Location = new System.Drawing.Point(109, 86);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(321, 23);
             this.txtNombre.TabIndex = 1;
@@ -128,7 +128,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(109, 128);
+            this.txtDescripcion.Location = new System.Drawing.Point(109, 126);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(321, 23);
             this.txtDescripcion.TabIndex = 2;
@@ -138,17 +138,18 @@
             this.cboCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategoria.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCategoria.FormattingEnabled = true;
-            this.cboCategoria.Location = new System.Drawing.Point(109, 170);
+            this.cboCategoria.Location = new System.Drawing.Point(109, 168);
             this.cboCategoria.Name = "cboCategoria";
             this.cboCategoria.Size = new System.Drawing.Size(321, 24);
             this.cboCategoria.TabIndex = 3;
+            this.cboCategoria.SelectedIndexChanged += new System.EventHandler(this.cboCategoria_SelectedIndexChanged);
             // 
             // cboMarca
             // 
             this.cboMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMarca.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboMarca.FormattingEnabled = true;
-            this.cboMarca.Location = new System.Drawing.Point(109, 206);
+            this.cboMarca.Location = new System.Drawing.Point(109, 204);
             this.cboMarca.Name = "cboMarca";
             this.cboMarca.Size = new System.Drawing.Size(321, 24);
             this.cboMarca.TabIndex = 4;
@@ -156,14 +157,14 @@
             // txtPrecio
             // 
             this.txtPrecio.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio.Location = new System.Drawing.Point(109, 248);
+            this.txtPrecio.Location = new System.Drawing.Point(109, 246);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(321, 23);
             this.txtPrecio.TabIndex = 5;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(109, 354);
+            this.btnAceptar.Location = new System.Drawing.Point(109, 352);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 8;
@@ -173,7 +174,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(355, 354);
+            this.btnCancelar.Location = new System.Drawing.Point(355, 352);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 9;
@@ -183,11 +184,10 @@
             // 
             // pbImagenes
             // 
-            this.pbImagenes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbImagenes.Location = new System.Drawing.Point(477, 46);
+            this.pbImagenes.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pbImagenes.Location = new System.Drawing.Point(466, 46);
             this.pbImagenes.Name = "pbImagenes";
-            this.pbImagenes.Size = new System.Drawing.Size(332, 263);
+            this.pbImagenes.Size = new System.Drawing.Size(303, 266);
             this.pbImagenes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagenes.TabIndex = 14;
             this.pbImagenes.TabStop = false;
@@ -196,7 +196,7 @@
             // 
             this.lblImagen.AutoSize = true;
             this.lblImagen.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImagen.Location = new System.Drawing.Point(53, 293);
+            this.lblImagen.Location = new System.Drawing.Point(53, 291);
             this.lblImagen.Name = "lblImagen";
             this.lblImagen.Size = new System.Drawing.Size(50, 16);
             this.lblImagen.TabIndex = 15;
@@ -205,7 +205,7 @@
             // txtImagen
             // 
             this.txtImagen.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtImagen.Location = new System.Drawing.Point(109, 291);
+            this.txtImagen.Location = new System.Drawing.Point(109, 289);
             this.txtImagen.Name = "txtImagen";
             this.txtImagen.Size = new System.Drawing.Size(321, 23);
             this.txtImagen.TabIndex = 6;
@@ -213,7 +213,7 @@
             // 
             // btnAgregarImagen
             // 
-            this.btnAgregarImagen.Location = new System.Drawing.Point(436, 291);
+            this.btnAgregarImagen.Location = new System.Drawing.Point(436, 289);
             this.btnAgregarImagen.Name = "btnAgregarImagen";
             this.btnAgregarImagen.Size = new System.Drawing.Size(24, 23);
             this.btnAgregarImagen.TabIndex = 7;
@@ -225,7 +225,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 478);
+            this.ClientSize = new System.Drawing.Size(850, 476);
             this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.txtImagen);
             this.Controls.Add(this.lblImagen);
@@ -244,6 +244,7 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCodigo);
+            this.MaximumSize = new System.Drawing.Size(1334, 778);
             this.MinimumSize = new System.Drawing.Size(866, 515);
             this.Name = "alta_modificacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

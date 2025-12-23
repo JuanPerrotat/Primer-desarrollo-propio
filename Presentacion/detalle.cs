@@ -36,7 +36,7 @@ namespace Presentacion
                 txtCodigo.Text = articulo.Codigo;
                 txtNombre.Text = articulo.Nombre;
                 txtDescripcion.Text = articulo.Descripcion;
-                txtPrecio.Text = articulo.Precio.ToString();
+                txtPrecio.Text = articulo.Precio.ToString("N2");
                 txtMarca.Text = articulo.Marca.Descripcion;
                 txtCategoria.Text = articulo.Categoria.Descripcion;
                 txtImagen.Text = articulo.ImagenUrl;
@@ -79,6 +79,11 @@ namespace Presentacion
                 return true;
 
             return false;
+        }
+
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

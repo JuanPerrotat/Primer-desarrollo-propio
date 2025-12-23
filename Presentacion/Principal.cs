@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -82,6 +83,7 @@ namespace Presentacion
         {
             dgvListaArticulos.Columns["ImagenUrl"].Visible = false;
             dgvListaArticulos.Columns["Id"].Visible = false;
+            dgvListaArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
         }
 
         private void dgvListaArticulos_SelectionChanged(object sender, EventArgs e)
@@ -112,7 +114,15 @@ namespace Presentacion
         {
 
             Articulo seleccionado;
+
+
+            if (dgvListaArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un artículo para modificar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
             seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+
             alta_modificacion modificar = new alta_modificacion(seleccionado);
             modificar.ShowDialog();
             cargar();
@@ -163,7 +173,7 @@ namespace Presentacion
         {
             List<Articulo> listaFiltrada;
             string filtro = txtFiltro.Text;
-            if (filtro.Length >= 3)
+            if (filtro.Length >= 2)
                 listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Codigo.ToUpper().Contains(filtro.ToUpper()));
 
             else
@@ -188,7 +198,7 @@ namespace Presentacion
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string opcion = cboCampo.SelectedItem.ToString();
-            if(opcion == "Precio")
+            if (opcion == "Precio")
             {
                 cboCriterio.Items.Clear();
                 cboCriterio.Items.Add("Mayor a");
@@ -210,6 +220,9 @@ namespace Presentacion
 
             try
             {
+                if (validarFiltro())
+                    return;
+
                 string campo = cboCampo.SelectedItem.ToString();
                 string criterio = cboCriterio.SelectedItem.ToString();
                 string filtro = txtFiltroAvanzado.Text;
@@ -226,18 +239,61 @@ namespace Presentacion
         {
             Articulo seleccionado;
 
-                if (dgvListaArticulos.CurrentRow == null)
-                {
-                    MessageBox.Show("Seleccione un artículo para ver su detalle.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return;
-                }
+            if (dgvListaArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un artículo para ver su detalle.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
 
-                seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;    
-                detalle verDetalle = new detalle(seleccionado);
-                verDetalle.ShowDialog();
-                cargar();
+            seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+            detalle verDetalle = new detalle(seleccionado);
+            verDetalle.ShowDialog();
+            cargar();
         }
 
+        private bool validarFiltro()
+        {
+            if (cboCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un campo para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+
+            if(cboCriterio.SelectedIndex <0)
+            {
+                MessageBox.Show("Seleccione un criterio para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+            {
+                MessageBox.Show("Complete los datos de búsqueda para filtrar el artículo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+
+            if(cboCampo.SelectedItem.ToString() == "Precio")
+            {
+                if (!soloNumeros(txtFiltroAvanzado.Text))
+                {
+                    MessageBox.Show("Ingrese solo números para filtrar por precio.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+       private bool soloNumeros(string cadena)
+        {
+
+            int comas = 0;
+            
+            foreach (char caracter in cadena)
+            {
+                if (!char.IsNumber(caracter))
+                    return false;
+            }
+            return true;
+        }
        
     }
 }

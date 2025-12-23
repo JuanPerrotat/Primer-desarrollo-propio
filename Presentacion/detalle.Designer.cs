@@ -85,6 +85,7 @@
             this.txtPrecio.ReadOnly = true;
             this.txtPrecio.Size = new System.Drawing.Size(321, 23);
             this.txtPrecio.TabIndex = 5;
+            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
             // 
             // txtDescripcion
             // 

@@ -57,7 +57,9 @@ namespace Presentacion
 
                 if(string.IsNullOrWhiteSpace(txtbCodigo.Text) 
                     || string.IsNullOrWhiteSpace(txtNombre.Text)
-                    || string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                    || string.IsNullOrWhiteSpace(txtDescripcion.Text)
+                    || cboCategoria.SelectedIndex == -1
+                    || cboMarca.SelectedIndex == -1)
                 {
                     MessageBox.Show("Por favor, complete todos los campos", "Error", 
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,17 +122,19 @@ namespace Presentacion
                 cboCategoria.ValueMember = "Id";
                 cboCategoria.DisplayMember = "Descripcion";
                 cboCategoria.DataSource = negocio.listar();
+                cboCategoria.SelectedIndex = -1;
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
                 cboMarca.DataSource = negocio2.listar();
+                cboMarca.SelectedIndex = -1;
 
 
-                if(articulo != null)
+                if (articulo != null)
                 {
                     txtbCodigo.Text = articulo.Codigo;
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
-                    txtPrecio.Text = articulo.Precio.ToString();
+                    txtPrecio.Text = articulo.Precio.ToString("N2");
                     cboCategoria.SelectedValue = articulo.Categoria.Id;
                     cboMarca.SelectedValue = articulo.Marca.Id;
                     txtImagen.Text = articulo.ImagenUrl;
@@ -207,6 +211,11 @@ namespace Presentacion
         public bool validarCeldasTexto(string celda)
         {
             return !string.IsNullOrEmpty(celda);
+        }
+
+        private void cboCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
