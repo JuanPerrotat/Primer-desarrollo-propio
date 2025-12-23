@@ -44,6 +44,7 @@
             this.lblFiltro = new System.Windows.Forms.Label();
             this.txtFiltroAvanzado = new System.Windows.Forms.TextBox();
             this.btnBuscarFiltroAvanzado = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagenes)).BeginInit();
             this.SuspendLayout();
@@ -110,7 +111,7 @@
             this.btnDetalle.Location = new System.Drawing.Point(16, 538);
             this.btnDetalle.Name = "btnDetalle";
             this.btnDetalle.Size = new System.Drawing.Size(111, 30);
-            this.btnDetalle.TabIndex = 2;
+            this.btnDetalle.TabIndex = 1;
             this.btnDetalle.Text = "Ver detalle";
             this.btnDetalle.UseVisualStyleBackColor = true;
             this.btnDetalle.Click += new System.EventHandler(this.btnDetalle_Click);
@@ -120,10 +121,10 @@
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.btnAgregar.Location = new System.Drawing.Point(134, 538);
+            this.btnAgregar.Location = new System.Drawing.Point(133, 538);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(111, 30);
-            this.btnAgregar.TabIndex = 3;
+            this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar artículo";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -133,10 +134,10 @@
             this.btnModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnModificar.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.btnModificar.Location = new System.Drawing.Point(252, 538);
+            this.btnModificar.Location = new System.Drawing.Point(250, 538);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(111, 30);
-            this.btnModificar.TabIndex = 4;
+            this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar artículo";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -146,10 +147,10 @@
             this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.btnEliminar.Location = new System.Drawing.Point(370, 538);
+            this.btnEliminar.Location = new System.Drawing.Point(367, 538);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(111, 30);
-            this.btnEliminar.TabIndex = 5;
+            this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "Eliminar artículo";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -231,11 +232,25 @@
             this.btnBuscarFiltroAvanzado.UseVisualStyleBackColor = true;
             this.btnBuscarFiltroAvanzado.Click += new System.EventHandler(this.btnBuscarFiltroAvanzado_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btnRefresh.Location = new System.Drawing.Point(484, 538);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(111, 30);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.Text = "Refrescar lista";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1294, 660);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnBuscarFiltroAvanzado);
             this.Controls.Add(this.txtFiltroAvanzado);
             this.Controls.Add(this.lblFiltro);
@@ -282,6 +297,7 @@
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.TextBox txtFiltroAvanzado;
         private System.Windows.Forms.Button btnBuscarFiltroAvanzado;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 

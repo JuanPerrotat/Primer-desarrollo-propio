@@ -294,6 +294,10 @@ namespace Presentacion
             }
             return true;
         }
-       
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            cargar();
+        }
     }
 }

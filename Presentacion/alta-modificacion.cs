@@ -48,11 +48,6 @@ namespace Presentacion
                 if (articulo == null)
                     articulo = new Articulo();
     
-                if (!decimal.TryParse(txtPrecio.Text, out decimal precio))
-                {
-                    MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
                 
 
                 if(string.IsNullOrWhiteSpace(txtbCodigo.Text) 
@@ -63,6 +58,12 @@ namespace Presentacion
                 {
                     MessageBox.Show("Por favor, complete todos los campos", "Error", 
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precio))
+                {
+                    MessageBox.Show("El precio debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
