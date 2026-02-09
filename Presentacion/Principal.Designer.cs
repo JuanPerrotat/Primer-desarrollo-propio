@@ -61,15 +61,16 @@
             // 
             // dgvListaArticulos
             // 
-            this.dgvListaArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvListaArticulos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvListaArticulos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             this.dgvListaArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListaArticulos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvListaArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvListaArticulos.GridColor = System.Drawing.SystemColors.MenuHighlight;
             this.dgvListaArticulos.Location = new System.Drawing.Point(15, 131);
             this.dgvListaArticulos.MultiSelect = false;
             this.dgvListaArticulos.Name = "dgvListaArticulos";
+            this.dgvListaArticulos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dgvListaArticulos.RowHeadersWidth = 51;
             this.dgvListaArticulos.Size = new System.Drawing.Size(843, 341);
             this.dgvListaArticulos.TabIndex = 1;

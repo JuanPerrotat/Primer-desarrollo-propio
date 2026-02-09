@@ -132,11 +132,19 @@ namespace Presentacion
         {
             articuloNegocio negocio = new articuloNegocio();
             Articulo seleccionado;
+
+            if (dgvListaArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un artículo para eliminar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+
             try
             {
                 DialogResult respuesta = MessageBox.Show("¿Está seguro de que desea eliminar permanentemente el artículo?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (respuesta == DialogResult.Yes)
                 {
+
                     seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
                     eliminar(seleccionado.Id);
                     MessageBox.Show("El artículo seleccionado ha sido eliminado correctamente.", "Advertencia");
@@ -259,7 +267,7 @@ namespace Presentacion
                 return true;
             }
 
-            if(cboCriterio.SelectedIndex <0)
+            if (cboCriterio.SelectedIndex < 0)
             {
                 MessageBox.Show("Seleccione un criterio para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
@@ -271,7 +279,7 @@ namespace Presentacion
                 return true;
             }
 
-            if(cboCampo.SelectedItem.ToString() == "Precio")
+            if (cboCampo.SelectedItem.ToString() == "Precio")
             {
                 if (!soloNumeros(txtFiltroAvanzado.Text))
                 {
@@ -282,11 +290,11 @@ namespace Presentacion
 
             return false;
         }
-       private bool soloNumeros(string cadena)
+        private bool soloNumeros(string cadena)
         {
 
             int comas = 0;
-            
+
             foreach (char caracter in cadena)
             {
                 if (!char.IsNumber(caracter))
