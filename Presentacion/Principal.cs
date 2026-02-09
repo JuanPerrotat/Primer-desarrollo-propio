@@ -82,6 +82,8 @@ namespace Presentacion
         private void OcultarColumnas()
         {
             dgvListaArticulos.Columns["ImagenUrl"].Visible = false;
+            dgvListaArticulos.Columns["Codigo"].Visible = false;
+            dgvListaArticulos.Columns["Descripcion"].Visible = false;
             dgvListaArticulos.Columns["Id"].Visible = false;
             dgvListaArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
         }
